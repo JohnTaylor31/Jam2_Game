@@ -24,12 +24,17 @@ public class Player : MonoBehaviour
     //Player start position
     Vector2 startPos;
 
+    //Food Variables
+    public Food foodScript;
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         isStartSpacePressed = true;
 
         startPos = transform.position;
+
+        foodScript.foodText.text = "Score: 0 ";
     }
 
     
@@ -67,5 +72,22 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("JunkFood") && collision.gameObject.activeSelf == true)
+        {
+            collision.gameObject.SetActive(false);
+            foodScript.currentFoodScore += foodScript.newFoodScore;
+            foodScript.foodText.text = "Score: " + foodScript.currentFoodScore;
+            Debug.Log("Junk Food Collected!" + foodScript.newFoodScore);
+        }
+
+        if (collision.gameObject.CompareTag("HealthFood") && collision.gameObject.activeSelf == true)
+        {
+            collision.gameObject.SetActive(false);
+            Debug.Log("Health Food Collected!");
+        }
     }
 }
