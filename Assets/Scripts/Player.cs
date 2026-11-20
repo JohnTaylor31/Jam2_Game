@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
 
     //Food Variables
     public Food foodScript;
+    public HealthFood healthFoodScript;
 
     void Start()
     {
@@ -76,18 +77,44 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("JunkFood") && collision.gameObject.activeSelf == true)
+        if (collision.gameObject.name == "Junk Food" && collision.gameObject.activeSelf == true)
         {
             collision.gameObject.SetActive(false);
             foodScript.currentFoodScore += foodScript.newFoodScore;
             foodScript.foodText.text = "Score: " + foodScript.currentFoodScore;
             Debug.Log("Junk Food Collected!" + foodScript.newFoodScore);
         }
-
-        if (collision.gameObject.CompareTag("HealthFood") && collision.gameObject.activeSelf == true)
+        if(collision.gameObject.activeSelf == true && collision.gameObject.name == "Junk Food_Medium")
         {
             collision.gameObject.SetActive(false);
-            Debug.Log("Health Food Collected!");
+            foodScript.currentFoodScore += (foodScript.newFoodScore * 2);
+            foodScript.foodText.text = "Score: " + foodScript.currentFoodScore;
+            Debug.Log("Junk Food Collected!" + foodScript.newFoodScore);
+        }
+        if (collision.gameObject.activeSelf == true && collision.gameObject.name == "Junk Food_Heavy")
+        {
+            collision.gameObject.SetActive(false);
+            foodScript.currentFoodScore += (foodScript.newFoodScore * 4);
+            foodScript.foodText.text = "Score: " + foodScript.currentFoodScore;
+            Debug.Log("Junk Food Collected!" + foodScript.newFoodScore);
+        }
+        if (collision.gameObject.name == "Health Food" && collision.gameObject.activeSelf == true)
+        {
+            collision.gameObject.SetActive(false);
+            healthFoodScript.currentHealthfoodScore += healthFoodScript.HealthFoodScore;
+            healthFoodScript.healthFoodText.text = "Score: " + healthFoodScript.currentHealthfoodScore;
+        }
+        if (collision.gameObject.activeSelf == true && collision.gameObject.name == "Health Food_Medium")
+        {
+            collision.gameObject.SetActive(false);
+            healthFoodScript.currentHealthfoodScore += healthFoodScript.HealthFoodScore;
+            healthFoodScript.healthFoodText.text = "Score: " + healthFoodScript.currentHealthfoodScore;
+        }
+        if (collision.gameObject.activeSelf == true && collision.gameObject.name == "Health Food_Heavy")
+        {
+            collision.gameObject.SetActive(false);
+            healthFoodScript.currentHealthfoodScore += healthFoodScript.HealthFoodScore;
+            healthFoodScript.healthFoodText.text = "Score: " + healthFoodScript.currentHealthfoodScore;
         }
     }
 }

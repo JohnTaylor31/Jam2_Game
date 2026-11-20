@@ -6,7 +6,7 @@ using UnityEngine;
 public class Food : MonoBehaviour
 {
     public int currentFoodScore;
-    public int newFoodScore = 0;
+    public int newFoodScore;
     public TMP_Text foodText;
 
     void Start()
