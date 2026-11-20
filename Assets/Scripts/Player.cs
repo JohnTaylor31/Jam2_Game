@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //Player Movement
         rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
     }
 
